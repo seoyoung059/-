@@ -1,0 +1,16 @@
+module shift_left_1(Imm, s_Imm, clk);
+
+	input [63:0] Imm;
+	input clk;
+	output [63:0] s_Imm;
+	
+	reg [63:0] s_Imm;
+	reg [64:0] imm_temp;
+	
+	
+	always @(negedge clk)
+	begin
+		s_Imm<=(Imm<<<1);
+	end
+	
+endmodule

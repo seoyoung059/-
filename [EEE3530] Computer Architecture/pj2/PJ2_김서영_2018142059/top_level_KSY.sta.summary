@@ -1,0 +1,69 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow Model Setup 'alu_ctl:inst5|ALUOperation[0]'
+Slack : -13.848
+TNS   : -755.366
+
+Type  : Slow Model Setup 'clock'
+Slack : -10.858
+TNS   : -37776.472
+
+Type  : Slow Model Setup 'INSTRUCTION[12]'
+Slack : -2.451
+TNS   : -6.069
+
+Type  : Slow Model Setup 'INSTRUCTION[0]'
+Slack : -0.257
+TNS   : -0.778
+
+Type  : Slow Model Hold 'alu_ctl:inst5|ALUOperation[0]'
+Slack : -1.224
+TNS   : -50.964
+
+Type  : Slow Model Hold 'INSTRUCTION[0]'
+Slack : -1.115
+TNS   : -7.206
+
+Type  : Slow Model Hold 'INSTRUCTION[12]'
+Slack : -0.744
+TNS   : -1.899
+
+Type  : Slow Model Hold 'clock'
+Slack : 0.796
+TNS   : 0.000
+
+Type  : Fast Model Setup 'alu_ctl:inst5|ALUOperation[0]'
+Slack : -5.490
+TNS   : -285.558
+
+Type  : Fast Model Setup 'clock'
+Slack : -3.831
+TNS   : -13116.065
+
+Type  : Fast Model Setup 'INSTRUCTION[12]'
+Slack : -0.534
+TNS   : -1.160
+
+Type  : Fast Model Setup 'INSTRUCTION[0]'
+Slack : 0.341
+TNS   : 0.000
+
+Type  : Fast Model Hold 'alu_ctl:inst5|ALUOperation[0]'
+Slack : -0.753
+TNS   : -37.687
+
+Type  : Fast Model Hold 'INSTRUCTION[0]'
+Slack : -0.740
+TNS   : -5.523
+
+Type  : Fast Model Hold 'INSTRUCTION[12]'
+Slack : -0.284
+TNS   : -0.738
+
+Type  : Fast Model Hold 'clock'
+Slack : 0.378
+TNS   : 0.000
+
+------------------------------------------------------------

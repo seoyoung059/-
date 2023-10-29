@@ -1,0 +1,10 @@
+71:  struct proc *p = c->proc;
+325:      // initproc->lock, which would be a deadlock, since we hold
+363:  acquire(&initproc->lock);
+365:  release(&initproc->lock);
+466:  c->proc = 0;
+478:        c->proc = p;
+479:        swtch(&c->context, &p->context);
+483:        c->proc = 0;
+491:// and have changed proc->state. Saves and restores
+494:// be proc->intena and proc->noff, but that would

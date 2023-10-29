@@ -1,0 +1,37 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow Model Setup 'clock'
+Slack : -11.874
+TNS   : -3817.605
+
+Type  : Slow Model Setup 'IFIDreg:inst36|IDinstr[0]'
+Slack : -4.542
+TNS   : -4.542
+
+Type  : Slow Model Hold 'clock'
+Slack : -3.071
+TNS   : -3.106
+
+Type  : Slow Model Hold 'IFIDreg:inst36|IDinstr[0]'
+Slack : -0.295
+TNS   : -0.295
+
+Type  : Fast Model Setup 'clock'
+Slack : -4.218
+TNS   : -1003.790
+
+Type  : Fast Model Setup 'IFIDreg:inst36|IDinstr[0]'
+Slack : -1.622
+TNS   : -1.622
+
+Type  : Fast Model Hold 'clock'
+Slack : -1.367
+TNS   : -4.666
+
+Type  : Fast Model Hold 'IFIDreg:inst36|IDinstr[0]'
+Slack : -0.099
+TNS   : -0.099
+
+------------------------------------------------------------

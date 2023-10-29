@@ -1,0 +1,239 @@
+Version 9.0 Build 235 06/17/2009 Service Pack 2 SJ Web Edition
+7
+3331
+OFF
+OFF
+OFF
+ON
+ON
+ON
+FV_OFF
+Level2
+0
+0
+VRSM_ON
+VHSM_ON
+0
+-- Start Library Paths --
+-- End Library Paths --
+-- Start VHDL Libraries --
+-- End VHDL Libraries --
+# entity
+8-bit-ALU
+# storage
+db|8-bit-ALU.(0).cnf
+db|8-bit-ALU.(0).cnf
+# case_insensitive
+# source_file
+8-bit-ALU.bdf
+abbf59bf6b417b6bba88518d72dd5f
+26
+# internal_option {
+BLOCK_DESIGN_NAMING
+AUTO
+}
+# hierarchies {
+|
+}
+# macro_sequence
+
+# end
+# entity
+21mux
+# storage
+db|8-bit-ALU.(3).cnf
+db|8-bit-ALU.(3).cnf
+# case_insensitive
+# source_file
+..|libraries|others|maxplus2|21mux.bdf
+58999bd3808c6118fcb8193d74b5b94f
+26
+# internal_option {
+BLOCK_DESIGN_NAMING
+AUTO
+}
+# hierarchies {
+MUX-ALU:inst8|4to1_MUX_PJ2:inst|21mux:inst2
+MUX-ALU:inst8|4to1_MUX_PJ2:inst|21mux:inst1
+MUX-ALU:inst8|4to1_MUX_PJ2:inst|21mux:inst
+MUX-ALU:inst8|4to1_MUX_PJ2:inst1|21mux:inst2
+MUX-ALU:inst8|4to1_MUX_PJ2:inst1|21mux:inst1
+MUX-ALU:inst8|4to1_MUX_PJ2:inst1|21mux:inst
+MUX-ALU:inst8|4to1_MUX_PJ2:inst3|21mux:inst2
+MUX-ALU:inst8|4to1_MUX_PJ2:inst3|21mux:inst1
+MUX-ALU:inst8|4to1_MUX_PJ2:inst3|21mux:inst
+MUX-ALU:inst8|4to1_MUX_PJ2:inst4|21mux:inst2
+MUX-ALU:inst8|4to1_MUX_PJ2:inst4|21mux:inst1
+MUX-ALU:inst8|4to1_MUX_PJ2:inst4|21mux:inst
+MUX-ALU:inst8|4to1_MUX_PJ2:inst5|21mux:inst2
+MUX-ALU:inst8|4to1_MUX_PJ2:inst5|21mux:inst1
+MUX-ALU:inst8|4to1_MUX_PJ2:inst5|21mux:inst
+MUX-ALU:inst8|4to1_MUX_PJ2:inst6|21mux:inst2
+MUX-ALU:inst8|4to1_MUX_PJ2:inst6|21mux:inst1
+MUX-ALU:inst8|4to1_MUX_PJ2:inst6|21mux:inst
+MUX-ALU:inst8|4to1_MUX_PJ2:inst7|21mux:inst2
+MUX-ALU:inst8|4to1_MUX_PJ2:inst7|21mux:inst1
+MUX-ALU:inst8|4to1_MUX_PJ2:inst7|21mux:inst
+MUX-ALU:inst8|4to1_MUX_PJ2:inst2|21mux:inst2
+MUX-ALU:inst8|4to1_MUX_PJ2:inst2|21mux:inst1
+MUX-ALU:inst8|4to1_MUX_PJ2:inst2|21mux:inst
+}
+# macro_sequence
+
+# end
+# entity
+One-Bit_FA
+# storage
+db|8-bit-ALU.(5).cnf
+db|8-bit-ALU.(5).cnf
+# case_insensitive
+# source_file
+One-Bit_FA.bdf
+6658b68e440d867d6cba78355bb4e65
+26
+# internal_option {
+BLOCK_DESIGN_NAMING
+AUTO
+}
+# hierarchies {
+ADDER:inst3|One-Bit_FA:inst
+ADDER:inst3|One-Bit_FA:inst1
+ADDER:inst3|One-Bit_FA:inst2
+ADDER:inst3|One-Bit_FA:inst3
+ADDER:inst3|One-Bit_FA:inst4
+ADDER:inst3|One-Bit_FA:inst5
+ADDER:inst3|One-Bit_FA:inst6
+ADDER:inst3|One-Bit_FA:inst7
+}
+# macro_sequence
+
+# end
+# entity
+COMP
+# storage
+db|8-bit-ALU.(7).cnf
+db|8-bit-ALU.(7).cnf
+# case_insensitive
+# source_file
+COMP.bdf
+c64d13986da145c692d55d96a374b26
+26
+# internal_option {
+BLOCK_DESIGN_NAMING
+AUTO
+}
+# hierarchies {
+COMP:inst4
+}
+# macro_sequence
+
+# end
+# entity
+ADDER
+# storage
+db|8-bit-ALU.(4).cnf
+db|8-bit-ALU.(4).cnf
+# case_insensitive
+# source_file
+ADDER.bdf
+8be779363915b96c4351e1bfb6f9be
+26
+# internal_option {
+BLOCK_DESIGN_NAMING
+AUTO
+}
+# hierarchies {
+ADDER:inst3
+}
+# macro_sequence
+
+# end
+# entity
+MUX-ALU
+# storage
+db|8-bit-ALU.(1).cnf
+db|8-bit-ALU.(1).cnf
+# case_insensitive
+# source_file
+MUX-ALU.bdf
+2aeb4bfda94e18da107194992b6eed1f
+26
+# internal_option {
+BLOCK_DESIGN_NAMING
+AUTO
+}
+# hierarchies {
+MUX-ALU:inst8
+}
+# macro_sequence
+
+# end
+# entity
+AND-PJ2
+# storage
+db|8-bit-ALU.(6).cnf
+db|8-bit-ALU.(6).cnf
+# case_insensitive
+# source_file
+AND-PJ2.bdf
+35adcbe5ba553e3449d03925503bff76
+26
+# internal_option {
+BLOCK_DESIGN_NAMING
+AUTO
+}
+# hierarchies {
+AND-PJ2:inst
+}
+# macro_sequence
+
+# end
+# entity
+OR-PJ2
+# storage
+db|8-bit-ALU.(8).cnf
+db|8-bit-ALU.(8).cnf
+# case_insensitive
+# source_file
+OR-PJ2.bdf
+42eadd3cbc121beb3522c37b3da4f6a
+26
+# internal_option {
+BLOCK_DESIGN_NAMING
+AUTO
+}
+# hierarchies {
+OR-PJ2:inst5
+}
+# macro_sequence
+
+# end
+# entity
+4to1_MUX_PJ2
+# storage
+db|8-bit-ALU.(2).cnf
+db|8-bit-ALU.(2).cnf
+# case_insensitive
+# source_file
+4to1_MUX_PJ2.bdf
+415dc2cbdc0afad2da825568514889a
+26
+# internal_option {
+BLOCK_DESIGN_NAMING
+AUTO
+}
+# hierarchies {
+MUX-ALU:inst8|4to1_MUX_PJ2:inst
+MUX-ALU:inst8|4to1_MUX_PJ2:inst1
+MUX-ALU:inst8|4to1_MUX_PJ2:inst3
+MUX-ALU:inst8|4to1_MUX_PJ2:inst4
+MUX-ALU:inst8|4to1_MUX_PJ2:inst5
+MUX-ALU:inst8|4to1_MUX_PJ2:inst6
+MUX-ALU:inst8|4to1_MUX_PJ2:inst7
+MUX-ALU:inst8|4to1_MUX_PJ2:inst2
+}
+# macro_sequence
+
+# end
+# complete
+

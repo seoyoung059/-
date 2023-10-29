@@ -1,0 +1,44 @@
+module imm_gen (input_32, output_64);
+	input [31:0] input_32;
+	output [63:0] output_64;
+	
+	// fill in the missing code
+	
+	wire [31:0] input_32;
+	reg [63:0] output_64;
+	
+	parameter R_FORMAT = 7'b0110011;
+	parameter LD       = 7'b0000011;
+	parameter SD       = 7'b0100011;
+	parameter BEQ      = 7'b1100011;
+
+	always @(input_32)
+	begin
+	
+		case (input_32[6:0])//opcode
+			
+			//sign extention
+			LD:
+			begin
+				output_64<={{52{input_32[31]}},input_32[31:20]};
+			end
+			
+			SD:
+			begin
+				output_64<={{52{input_32[31]}},input_32[31:25],input_32[11:7]};
+			end
+			
+			BEQ:
+			begin
+				output_64<={{53{input_32[31]}},input_32[7],input_32[30:25],input_32[11:8]};
+			end
+			
+			
+	
+	
+		endcase
+	end
+
+
+	// fill in the missing code
+endmodule

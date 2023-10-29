@@ -1,0 +1,17 @@
+Analysis & Synthesis Status : Successful - Sun Jun 14 01:16:43 2020
+Quartus II Version : 9.0 Build 235 06/17/2009 SP 2 SJ Web Edition
+Revision Name : project3_KSY
+Top-level Entity Name : project3_KSY
+Family : Arria GX
+Logic utilization : N/A
+    Combinational ALUTs : 601
+    Dedicated logic registers : 792
+Total registers : 792
+Total pins : 489
+Total virtual pins : 0
+Total block memory bits : 8,192
+DSP block 9-bit elements : 0
+Total GXB Receiver Channels : 0
+Total GXB Transmitter Channels : 0
+Total PLLs : 0
+Total DLLs : 0

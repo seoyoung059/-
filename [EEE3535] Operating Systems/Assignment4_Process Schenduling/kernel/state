@@ -1,0 +1,290 @@
+48:  if((q->head==p) && (q->tail==p)){
+49:    q->head=0;
+50:    q->tail=0;
+52:  else if(q->head == p) {
+53:    q->head = p->next;
+54:    (p->next)->prev=0;
+56:  else if(q->tail == p){
+57:    (p->prev)->next = 0;
+58:    (q->tail) = (p->prev);
+61:    (p->prev)->next = p->next;
+62:    (p->next)->prev = p->prev;
+64:  p->pqueue = 3;
+65:  //p->moveto = 3;
+66:  p->ccount = 0;
+68:  p->prev = 0;
+69:  p->next = 0;
+70:  q->qsize--;
+77:  if((q->head == 0) && (q->tail == 0)){
+78:    q->head = p;
+79:    //q->tail = p;
+80:    p->prev = 0;
+82:    p->next = 0;
+85:    p->next = 0;
+86:    (q->tail)->next = p;
+87:    p->prev = q->tail;
+88:    //(q->tail) = p;
+91:  q->qsize++;
+92:  q->tail = p;
+93:  printf("%d\n",q->qsize);
+94:  if(q==&q0){p->pqueue=0;}
+95:  else if(q==&q1){p->pqueue=1;}
+96:  else if(q==&q2){p->pqueue=2;}
+97:  else {p->pqueue=3;}
+98:  p->ccount=0;
+111:      initlock(&p->lock, "proc");
+119:      uint64 va = KSTACK((int) (p - proc));
+121:      p->kstack = va;
+150:  struct proc *p = c->proc;
+169:// and return with p->lock held.
+177:    acquire(&p->lock);
+178:    if(p->state == UNUSED) {
+181:      release(&p->lock);
+187:  p->pid = allocpid();
+190:  if((p->trapframe = (struct trapframe *)kalloc()) == 0){
+191:    release(&p->lock);
+196:  p->pagetable = proc_pagetable(p);
+197:  if(p->pagetable == 0){
+199:    release(&p->lock);
+205:  memset(&p->context, 0, sizeof(p->context));
+206:  p->context.ra = (uint64)forkret;
+207:  p->context.sp = p->kstack + PGSIZE;
+214:// p->lock must be held.
+220:         p->name, p->pid, 0, 0, 0);
+222:  if(p->trapframe)
+223:    kfree((void*)p->trapframe);
+224:  p->trapframe = 0;
+225:  if(p->pagetable)
+226:    proc_freepagetable(p->pagetable, p->sz);
+227:  p->pagetable = 0;
+228:  p->sz = 0;
+229:  p->pid = 0;
+230:  p->parent = 0;
+231:  p->name[0] = 0;
+232:  p->chan = 0;
+233:  p->killed = 0;
+234:  p->xstate = 0;
+235:  p->state = UNUSED;
+237:  switch(p->pqueue){
+243:  p->moveto = 3;
+244:  p->pqueue = 3;
+245:  p->ccount = 0;
+246:  p->next = 0;
+247:  p->prev = 0;
+249:  p->qtime[2] = 0;
+250:  p->qtime[1] = 0;
+251:  p->qtime[0] = 0;
+279:              (uint64)(p->trapframe), PTE_R | PTE_W) < 0){
+299:// od -t xC initcode
+321:  uvminit(p->pagetable, initcode, sizeof(initcode));
+322:  p->sz = PGSIZE;
+325:  p->trapframe->epc = 0;      // user program counter
+326:  p->trapframe->sp = PGSIZE;  // user stack pointer
+328:  safestrcpy(p->name, "initcode", sizeof(p->name));
+329:  p->cwd = namei("/");
+331:  p->state = RUNNABLE;
+336:  p->next = 0;
+337:  p->pqueue = 2;
+338:  p->moveto = 2;
+339:  p->ccount = 0;
+341:  p->qtime[2] = 0;
+342:  p->qtime[1] = 0;
+343:  p->qtime[0] = 0;
+346:  release(&p->lock);
+350:// Return 0 on success, -1 on failure.
+357:  sz = p->sz;
+359:    if((sz = uvmalloc(p->pagetable, sz, sz + n)) == 0) {
+360:      return -1;
+363:    sz = uvmdealloc(p->pagetable, sz, sz + n);
+365:  p->sz = sz;
+381:    return -1;
+385:  if(uvmcopy(p->pagetable, np->pagetable, p->sz) < 0){
+387:    release(&np->lock);
+388:    return -1;
+390:  np->sz = p->sz;
+392:  np->parent = p;
+395:  *(np->trapframe) = *(p->trapframe);
+398:  np->trapframe->a0 = 0;
+402:    if(p->ofile[i])
+403:      np->ofile[i] = filedup(p->ofile[i]);
+404:  np->cwd = idup(p->cwd);
+406:  safestrcpy(np->name, p->name, sizeof(p->name));
+408:  pid = np->pid;
+410:  np->state = RUNNABLE;
+416:  np->pqueue = 2;
+417:  np->moveto = 2;
+418:  np->ccount = 0;
+419:  np->next = 0;
+422:  np->qtime[2] = 0;
+423:  np->qtime[1] = 0;
+424:  np->qtime[0] = 0;
+427:  release(&np->lock);
+433:// Caller must hold p->lock.
+440:    // this code uses pp->parent without holding pp->lock.
+444:    if(pp->parent == p){
+445:      // pp->parent can't change between the check and the acquire()
+447:      acquire(&pp->lock);
+448:      pp->parent = initproc;
+450:      // initproc->lock, which would be a deadlock, since we hold
+453:      release(&pp->lock);
+471:    if(p->ofile[fd]){
+472:      struct file *f = p->ofile[fd];
+474:      p->ofile[fd] = 0;
+479:  iput(p->cwd);
+481:  p->cwd = 0;
+483:  // we might re-parent a child to init. we can't be precise about
+488:  acquire(&initproc->lock);
+490:  release(&initproc->lock);
+492:  // grab a copy of p->parent, to ensure that we unlock the same
+496:  // to a dead or wrong process; proc structs are never re-allocated
+498:  acquire(&p->lock);
+499:  struct proc *original_parent = p->parent;
+500:  release(&p->lock);
+503:  // the parent-then-child rule says we have to lock it first.
+504:  acquire(&original_parent->lock);
+506:  acquire(&p->lock);
+514:  p->xstate = status;
+515:  p->state = ZOMBIE;
+516:  p->moveto = 0;
+518:  release(&original_parent->lock);
+526:// Return -1 if this process has no children.
+534:  // hold p->lock for the whole time to avoid lost
+536:  acquire(&p->lock);
+542:      // this code uses np->parent without holding np->lock.
+544:      // since np might be an ancestor, and we already hold p->lock.
+545:      if(np->parent == p){
+546:        // np->parent can't change between the check and the acquire()
+548:        acquire(&np->lock);
+550:        if(np->state == ZOMBIE){
+552:          pid = np->pid;
+553:          if(addr != 0 && copyout(p->pagetable, addr, (char *)&np->xstate,
+554:                                  sizeof(np->xstate)) < 0) {
+555:            release(&np->lock);
+556:            release(&p->lock);
+557:            return -1;
+560:          release(&np->lock);
+561:          release(&p->lock);
+564:        release(&np->lock);
+569:    if(!havekids || p->killed){
+570:      release(&p->lock);
+571:      return -1;
+575:    sleep(p, &p->lock);  //DOC: wait-sleep
+579:// Per-CPU process scheduler.
+582://  - choose a process to run.
+583://  - swtch to start running that process.
+584://  - eventually that process transfers control
+596:  c->proc = 0;
+602:   // printf("state: %d\n",q0.head->pqueue);
+605:      acquire(&p->lock);
+606:      if(p->state == RUNNABLE) {
+610:        p->state = RUNNING;
+611:        c->proc = p;
+612:        swtch(&c->context, &p->context);
+614:	c->proc = 0;
+616:      release(&p->lock);
+619:        // It should have changed its p->state before coming back.
+627:      acquire(&p->lock);
+628:      np=p->next;
+629:      if(p->state == RUNNABLE){
+630:	p->state = RUNNING;
+631:	c->proc = p;
+632:	//np = (p->next);
+633:	swtch(&c->context, &p->context);
+634:	printf("execute sth\n%d\n",p->moveto);
+635:	printf("%d",p->state);
+638:        // It should have changed its p->state before coming back.
+639:	switch(p->moveto){
+643:	    p->pqueue=0;
+644:	    p->moveto=0;
+649:	    p->pqueue=1;
+650:	    p->moveto=1;
+655:	    p->pqueue=2;
+656:	    p->moveto=2;
+660:	    p->pqueue=3;
+661:	    p->moveto=3;
+665:        c->proc = 0;
+667:      release(&p->lock);
+678:    acquire(&p->lock);
+679:    if(p->state == RUNNABLE){
+680:      p->state = RUNNING;
+681:      c->proc = p;
+682:      //np = (p->next);
+683:      swtch(&c->context, &p->context);
+686:      // It should have changed its p->state before coming back.
+687:      switch(p->moveto){
+691:	  p->pqueue=0;
+692:	  p->moveto=0;
+697:	  p->pqueue=1;
+698:	  p->moveto=1;
+703:	  p->pqueue=2;
+704:	  p->moveto=2;
+708:	  p->pqueue=3;
+709:	  p->moveto=3;
+712:      c->proc = 0;
+714:    release(&p->lock);
+718:      acquire(&p->lock);
+719:      if((p->state == RUNNABLE)&&(p->pqueue==0)&&(p->moveto==2)){
+723:      release(&p->lock);
+728:// Switch to scheduler.  Must hold only p->lock
+729:// and have changed proc->state. Saves and restores
+732:// be proc->intena and proc->noff, but that would
+741:  if(!holding(&p->lock))
+742:    panic("sched p->lock");
+743:  if(mycpu()->noff != 1)
+745:  if(p->state == RUNNING)
+750:  intena = mycpu()->intena;
+751:  swtch(&p->context, &mycpu()->context);
+752:  mycpu()->intena = intena;
+760:  acquire(&p->lock);
+761:  p->state = RUNNABLE;
+763:  /*if(p->ccount>=100){
+764:    p->moveto = 1;
+766:  else {p->moveto = 2;}*/
+768:  release(&p->lock);
+778:  // Still holding p->lock from scheduler.
+779:  release(&myproc()->lock);
+799:  // Must acquire p->lock in order to
+800:  // change p->state and then call sched.
+801:  // Once we hold p->lock, we can be
+803:  // (wakeup locks p->lock),
+805:  if(lk != &p->lock){  //DOC: sleeplock0
+806:    acquire(&p->lock);  //DOC: sleeplock1
+811:  p->chan = chan;
+812:  p->state = SLEEPING;
+813:  p->moveto = 0;
+818:  p->chan = 0;
+821:  if(lk != &p->lock){
+822:    release(&p->lock);
+828:// Must be called without any p->lock.
+835:    acquire(&p->lock);
+836:    if(p->state == SLEEPING && p->chan == chan) {
+837:      p->state = RUNNABLE;
+838:      p->moveto = 2;
+840:    release(&p->lock);
+845:// Caller must hold p->lock.
+849:  if(!holding(&p->lock))
+851:  if(p->chan == p && p->state == SLEEPING) {
+852:    p->state = RUNNABLE;
+853:    p->moveto = 2;
+866:    acquire(&p->lock);
+867:    if(p->pid == pid){
+868:      p->killed = 1;
+869:      if(p->state == SLEEPING){
+871:        p->state = RUNNABLE;
+872:	p->moveto = 2;
+874:      release(&p->lock);
+877:    release(&p->lock);
+879:  return -1;
+884:// Returns 0 on success, -1 on error.
+890:    return copyout(p->pagetable, dst, src, len);
+899:// Returns 0 on success, -1 on error.
+905:    return copyin(p->pagetable, dst, src, len);
+930:    if(p->state == UNUSED)
+932:    if(p->state >= 0 && p->state < NELEM(states) && states[p->state])
+933:      state = states[p->state];
+936:    printf("%d %s %s", p->pid, state, p->name);
+947:    //acquire(&p->lock);
+948:    if(p->state == RUNNING){
+949:      p->ccount++;
+950:      p->qtime[p->pqueue]++;
+953:  //release(&p->lock);

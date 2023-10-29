@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="project3_KSY">
+		<CBX_INST_ENTRY INSTANCE_NAME="|project3_KSY|BUSMUX:inst13|lpm_mux:$00000" CBX_FILE_NAME="mux_thc.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|project3_KSY|BUSMUX:inst8|lpm_mux:$00000" CBX_FILE_NAME="mux_thc.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|project3_KSY|reg_file:inst18|altsyncram:ARRAY_rtl_1" CBX_FILE_NAME="altsyncram_p6j1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|project3_KSY|BUSMUX:inst10|lpm_mux:$00000" CBX_FILE_NAME="mux_thc.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|project3_KSY|mem32:inst40|altsyncram:mem_array_rtl_0" CBX_FILE_NAME="altsyncram_uti1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|project3_KSY|reg_file:inst18|altsyncram:ARRAY_rtl_2" CBX_FILE_NAME="altsyncram_p6j1.tdf"/>
+	</PROJECT>
+</LOG_ROOT>
